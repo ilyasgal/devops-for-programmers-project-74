@@ -5,7 +5,8 @@ services:
   app: 
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.production
+    image: ilyasgaly/devops-for-programmers-project-74
     command: make test
     volumes:
       - "./app:/app"
