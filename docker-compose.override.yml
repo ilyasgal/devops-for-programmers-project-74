@@ -6,8 +6,24 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: make dev
+    command: npm run dev #make dev
     ports:
-      - "8060:8080"
+      - "8080:8080"
     volumes:
       - "./app:/app"
+
+  webserver:
+    image: caddy:2.6.2
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - "./services/caddy/Caddyfile:/etc/caddy/Caddyfile"
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
+volumes:
+  caddy_data:
+  caddy_config:
